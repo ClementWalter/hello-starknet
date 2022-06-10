@@ -67,7 +67,7 @@
                     {
                         "location": {
                             "end_col": 7,
-                            "end_line": 13,
+                            "end_line": 14,
                             "input_file": {
                                 "filename": "cairo_intro.cairo"
                             },
@@ -79,12 +79,12 @@
                 ],
                 "inst": {
                     "end_col": 17,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 12,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "3": {
@@ -106,12 +106,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 21,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 12,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "4": {
@@ -134,12 +134,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 25,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 12,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "5": {
@@ -163,12 +163,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 29,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 12,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "6": {
@@ -193,12 +193,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 33,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 12,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "7": {
@@ -224,12 +224,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 37,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 12,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "8": {
@@ -256,12 +256,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 46,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 12,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "10": {
@@ -289,12 +289,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 50,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 49,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "12": {
@@ -323,12 +323,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 50,
-                    "end_line": 14,
+                    "end_line": 15,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 5,
-                    "start_line": 14
+                    "start_line": 15
                 }
             },
             "13": {
@@ -371,12 +371,12 @@
                             "parent_location": [
                                 {
                                     "end_col": 14,
-                                    "end_line": 16,
+                                    "end_line": 17,
                                     "input_file": {
                                         "filename": "cairo_intro.cairo"
                                     },
                                     "start_col": 5,
-                                    "start_line": 16
+                                    "start_line": 17
                                 },
                                 "While trying to retrieve the implicit argument 'output_ptr' in:"
                             ],
@@ -415,12 +415,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 14,
-                    "end_line": 16,
+                    "end_line": 17,
                     "input_file": {
                         "filename": "cairo_intro.cairo"
                     },
                     "start_col": 5,
-                    "start_line": 16
+                    "start_line": 17
                 }
             }
         }
@@ -432,7 +432,7 @@
                     "__main__",
                     "__main__.main"
                 ],
-                "code": "from sympy import Poly, FiniteField\nfrom sympy.abc import x\n\nF = FiniteField(PRIME)\np = Poly(x**7 + x + 18, domain=F)\nids.x = int(list(p.ground_roots().keys())[0])",
+                "code": "from sympy import Poly, FiniteField\nfrom sympy.abc import x\nF = FiniteField(PRIME)\n\np = Poly(x**7 + x + 18, domain=F)\nids.x = int(list(p.ground_roots().keys())[0])\nprint(ids.x)",
                 "flow_tracking_data": {
                     "ap_tracking": {
                         "group": 0,

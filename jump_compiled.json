@@ -3,12 +3,9 @@
     "builtins": [],
     "data": [
         "0x480680017fff8000",
-        "0x2",
-        "0x48507fff7fff8000",
-        "0x482480017fff8000",
-        "0x1",
-        "0x10780017fff7fff",
-        "0x800000000000010fffffffffffffffffffffffffffffffffffffffffffffffe"
+        "0x3",
+        "0x48307fff7fff8000",
+        "0x208b7fff7fff7ffe"
     ],
     "debug_info": {
         "file_contents": {},
@@ -51,12 +48,12 @@
                 "hints": [],
                 "inst": {
                     "end_col": 37,
-                    "end_line": 5,
+                    "end_line": 3,
                     "input_file": {
                         "filename": "jump.cairo"
                     },
                     "start_col": 5,
-                    "start_line": 5
+                    "start_line": 3
                 }
             },
             "3": {
@@ -73,36 +70,13 @@
                 },
                 "hints": [],
                 "inst": {
-                    "end_col": 30,
+                    "end_col": 8,
                     "end_line": 6,
                     "input_file": {
                         "filename": "jump.cairo"
                     },
                     "start_col": 5,
                     "start_line": 6
-                }
-            },
-            "5": {
-                "accessible_scopes": [
-                    "__main__",
-                    "__main__.main"
-                ],
-                "flow_tracking_data": {
-                    "ap_tracking": {
-                        "group": 0,
-                        "offset": 3
-                    },
-                    "reference_ids": {}
-                },
-                "hints": [],
-                "inst": {
-                    "end_col": 16,
-                    "end_line": 7,
-                    "input_file": {
-                        "filename": "jump.cairo"
-                    },
-                    "start_col": 5,
-                    "start_line": 7
                 }
             }
         }
@@ -135,10 +109,6 @@
         "__main__.main.SIZEOF_LOCALS": {
             "type": "const",
             "value": 0
-        },
-        "__main__.main.my_loop": {
-            "pc": 2,
-            "type": "label"
         }
     },
     "main_scope": "__main__",
