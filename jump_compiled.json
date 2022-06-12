@@ -2,10 +2,12 @@
     "attributes": [],
     "builtins": [],
     "data": [
-        "0x480680017fff8000",
+        "0x480680017fff8001",
         "0x3",
+        "0x480680017fff7fff",
         "0x48307fff7fff8000",
-        "0x208b7fff7fff7ffe"
+        "0x10780017fff7fff",
+        "0x800000000000011000000000000000000000000000000000000000000000000"
     ],
     "debug_info": {
         "file_contents": {},
@@ -24,7 +26,7 @@
                 },
                 "hints": [],
                 "inst": {
-                    "end_col": 19,
+                    "end_col": 23,
                     "end_line": 2,
                     "input_file": {
                         "filename": "jump.cairo"
@@ -47,7 +49,7 @@
                 },
                 "hints": [],
                 "inst": {
-                    "end_col": 37,
+                    "end_col": 41,
                     "end_line": 3,
                     "input_file": {
                         "filename": "jump.cairo"
@@ -56,7 +58,7 @@
                     "start_line": 3
                 }
             },
-            "3": {
+            "4": {
                 "accessible_scopes": [
                     "__main__",
                     "__main__.main"
@@ -70,13 +72,13 @@
                 },
                 "hints": [],
                 "inst": {
-                    "end_col": 8,
-                    "end_line": 6,
+                    "end_col": 15,
+                    "end_line": 4,
                     "input_file": {
                         "filename": "jump.cairo"
                     },
                     "start_col": 5,
-                    "start_line": 6
+                    "start_line": 4
                 }
             }
         }
