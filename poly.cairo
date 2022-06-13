@@ -33,9 +33,13 @@ func only_5():
     ret
 end
 
+func using_tempvar():
+    tempvar x = 100
+    tempvar y = x * x * x + 23 * x * x + 45 * x + 67
+    ret
+end
+
 func main():
-    [ap] = 100
-    [ap + 2] = 200
-    [ap + 1] = 150
+    using_tempvar()
     ret
 end
