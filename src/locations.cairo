@@ -1,11 +1,5 @@
 from starkware.cairo.lang.compiler.lib.registers import get_fp_and_pc
-
-
-data_label:
-dw 1;
-dw 2;
-dw 3;
-dw 4;
+from labels import data_label
 
 func test_use_data() {
     let (_, pc) = get_fp_and_pc();
