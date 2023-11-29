@@ -1,11 +1,10 @@
 %builtins range_check
 
-from jump import fibonacci
+from array import test_count_not_zero_empty_array
 
 func main{range_check_ptr}() {
 
-    let res = fibonacci(10);
-    %{ print(f"{ids.res=}") %}
+    test_count_not_zero_empty_array();
 
     return ();
 

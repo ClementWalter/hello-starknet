@@ -6,6 +6,7 @@ from starkware.cairo.common.math import unsigned_div_rem
 from starkware.cairo.common.memcpy import memcpy
 from starkware.cairo.common.uint256 import Uint256
 
+from print import print_dict
 
 func dict_keys{range_check_ptr}(dict_start: DictAccess*, dict_end: DictAccess*) -> (
     keys_len: felt, keys: felt*
@@ -253,6 +254,27 @@ func test__default_dict_copy__should_return_copied_dict{range_check_ptr}() {
         let (value) = dict_read(key + 10);
         assert value = default_value;
     }
+
+    return ();
+}
+
+func test__default_dict_copy__should_copy_empty_dict{range_check_ptr}() {
+    alloc_locals;
+
+    let (dict_ptr_start) = default_dict_new(0);
+    let (new_start, new_ptr) = default_dict_copy(dict_ptr_start, dict_ptr_start);
+
+    let key = 0x7e1;
+    let dict_ptr = new_ptr;
+    with dict_ptr {
+        let (value) = dict_read(key);
+        assert value = 0;
+    }
+    let (init_dict_start, init_dict_end) = default_dict_finalize(dict_ptr_start, dict_ptr_start, 0);
+    let (copied_dict_start, copied_dict_end) = default_dict_finalize(new_start, dict_ptr, 0);
+
+    print_dict('init', init_dict_end, 0);
+    print_dict('copied', copied_dict_end, 0);
 
     return ();
 }

@@ -1,6 +1,8 @@
 from starkware.cairo.common.uint256 import Uint256
 from starkware.cairo.common.memcpy import memcpy
+from starkware.cairo.common.memset import memset
 from starkware.cairo.common.alloc import alloc
+from starkware.cairo.common.math_cmp import is_not_zero
 
 struct Address {
     starknet: felt,
@@ -20,6 +22,64 @@ func copy(transfers_len: felt, transfers: Transfer*) -> (new_transfers: Transfer
     memcpy(dst=new_transfers, src=transfers, len=transfers_len * Transfer.SIZE);
 
     return (cast(new_transfers, Transfer*),);
+}
+
+func count_not_zero(arr_len: felt, arr: felt*) -> felt {
+
+        if (arr_len == 0) {
+            return 0;
+        }
+
+        tempvar len = arr_len;
+        tempvar count = 0;
+        tempvar arr = arr;
+
+        body:
+        let len = [ap - 3];
+        let count = [ap - 2];
+        let arr = cast([ap - 1], felt*);
+        let not_zero = is_not_zero([arr]);
+
+        tempvar len = len - 1;
+        tempvar count = count + not_zero;
+        tempvar arr = arr + 1;
+
+        jmp body if len != 0;
+
+        let count = [ap - 2];
+
+        return count;
+}
+
+func test_count_not_zero_returns_count() {
+    alloc_locals;
+
+    let (arr: felt*) = alloc();
+    assert [arr] = 0;
+    assert [arr + 1] = 1;
+    assert [arr + 2] = 2;
+    assert [arr + 3] = 0;
+
+    let count = count_not_zero(4, arr);
+    assert count = 2;
+
+    return ();
+}
+
+func test_count_not_zero_empty_array() {
+    alloc_locals;
+
+    let (arr: felt*) = alloc();
+    let count = count_not_zero(0, arr);
+    assert count = 0;
+
+    return ();
+}
+
+func test_vector_capacity_exceeded() {
+    let (arr: felt*) = alloc();
+    memset(arr, 0, 0xffffffff);
+    return ();
 }
 
 func test__copy__should_return_copied_segment() {
