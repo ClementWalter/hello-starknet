@@ -1,10 +1,10 @@
 %builtins range_check
 
-from array import test_count_not_zero_empty_array
+from string import test_felt_to_ascci_not_zero
 
 func main{range_check_ptr}() {
 
-    test_count_not_zero_empty_array();
+    test_felt_to_ascci_not_zero();
 
     return ();
 
