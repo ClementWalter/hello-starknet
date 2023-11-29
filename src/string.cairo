@@ -1,35 +1,40 @@
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.math import unsigned_div_rem
 
+from array import reverse
+
 func felt_to_ascii{range_check_ptr}(n: felt) -> (ascii_len: felt, ascii: felt*) {
-    let (ascii: felt*) = alloc();
+    alloc_locals;
+    let (local ascii: felt*) = alloc();
 
     tempvar range_check_ptr = range_check_ptr;
-    tempvar ascii_len = 0;
-    tempvar ascii = ascii;
     tempvar n = n;
+    tempvar ascii_len = 0;
 
     body:
-    let range_check_ptr = [ap - 4];
-    let ascii_len = [ap - 3];
-    let ascii = cast([ap - 2], felt*);
-    let n = [ap - 1];
+    let ascii = cast([fp], felt*);
+    let range_check_ptr = [ap - 3];
+    let n = [ap - 2];
+    let ascii_len = [ap - 1];
 
     let (n, digit) = unsigned_div_rem(n, 10);
-    assert [ascii] = digit + '0';
+    assert [ascii + ascii_len] = digit + '0';
 
     tempvar range_check_ptr = range_check_ptr;
-    tempvar ascii_len = ascii_len + 1;
-    tempvar ascii = ascii + 1;
     tempvar n = n;
+    tempvar ascii_len = ascii_len + 1;
 
     jmp body if n != 0;
 
-    let ascii_len = [ap - 3];
-    let ascii = cast([ap - 2], felt*);
+    let range_check_ptr = [ap - 3];
+    let ascii_len = [ap - 1];
+    let ascii = cast([fp], felt*);
+
+    let (ascii) = reverse(ascii_len, ascii);
 
     return (ascii_len, ascii);
 }
+
 
 func test_felt_to_ascii_zero{range_check_ptr}() {
 

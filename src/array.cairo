@@ -16,6 +16,31 @@ struct Transfer {
     amount: Uint256,
 }
 
+func reverse(arr_len: felt, arr: felt*) -> (rev: felt*) {
+    alloc_locals;
+
+    if (arr_len == 0) {
+        return (rev=arr);
+    }
+
+    let (local rev: felt*) = alloc();
+    tempvar i = arr_len;
+
+    body:
+    let arr_len = [fp - 4];
+    let arr = cast([fp - 3], felt*);
+    let rev = cast([fp], felt*);
+    let i = [ap - 1];
+
+    assert [rev + i - 1] = [arr + arr_len - i];
+    tempvar i = i - 1;
+
+    jmp body if i != 0;
+
+    let rev = cast([fp], felt*);
+    return (rev=rev);
+}
+
 func copy(transfers_len: felt, transfers: Transfer*) -> (new_transfers: Transfer*) {
     alloc_locals;
     let (local new_transfers: felt*) = alloc();
@@ -104,6 +129,33 @@ func test__copy__should_return_copied_segment() {
     assert transfer_copy.recipient.evm = transfer.recipient.evm;
     assert transfer_copy.amount = transfer.amount;
     assert transfer_copy.amount = transfer.amount;
+
+    return ();
+}
+
+func test__reverse__should_reverse_empty() {
+    alloc_locals;
+
+    let (arr: felt*) = alloc();
+
+    let (rev) = reverse(0, arr);
+
+    return ();
+}
+
+func test__reverse__should_reverse_non_empty() {
+    alloc_locals;
+
+    let (arr: felt*) = alloc();
+    assert [arr] = 1;
+    assert [arr + 1] = 2;
+    assert [arr + 2] = 3;
+
+    let (rev) = reverse(3, arr);
+
+    assert [rev] = 3;
+    assert [rev + 1] = 2;
+    assert [rev + 2] = 1;
 
     return ();
 }
