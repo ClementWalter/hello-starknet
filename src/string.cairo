@@ -35,25 +35,27 @@ func felt_to_ascii{range_check_ptr}(n: felt) -> (ascii_len: felt, ascii: felt*) 
     return (ascii_len, ascii);
 }
 
+namespace Tests {
+    namespace FeltToAscii {
+        func test_should_return_zero{range_check_ptr}() {
+            let (ascii_len, ascii) = felt_to_ascii(0);
 
-func test_felt_to_ascii_zero{range_check_ptr}() {
+            assert ascii_len = 1;
+            assert [ascii] = '0';
 
-    let (ascii_len, ascii) = felt_to_ascii(0);
+            return ();
+        }
 
-    assert ascii_len = 1;
-    assert [ascii] = '0';
+        func test_should_encode_1234{range_check_ptr}() {
+            let (ascii_len, ascii) = felt_to_ascii(1234);
 
-    return ();
-}
+            assert ascii_len = 4;
+            assert [ascii] = '1';
+            assert [ascii + 1] = '2';
+            assert [ascii + 2] = '3';
+            assert [ascii + 3] = '4';
 
-func test_felt_to_ascci_not_zero{range_check_ptr}() {
-    let (ascii_len, ascii) = felt_to_ascii(1234);
-
-    assert ascii_len = 4;
-    assert [ascii] = '1';
-    assert [ascii + 1] = '2';
-    assert [ascii + 2] = '3';
-    assert [ascii + 3] = '4';
-
-    return ();
+            return ();
+        }
+    }
 }
