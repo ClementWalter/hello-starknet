@@ -55,7 +55,6 @@ func uint256_to_bytes{range_check_ptr}(n: Uint256) -> (bytes_len: felt, bytes: f
 namespace Tests {
     namespace Uint256ToBytes {
         func test_should_return_zero{range_check_ptr}() {
-            alloc_locals;
             let n = Uint256(0, 0);
             let (bytes_len, bytes) = uint256_to_bytes(n);
             assert [bytes] = 0;
@@ -64,7 +63,6 @@ namespace Tests {
         }
 
         func test_should_return_one{range_check_ptr}() {
-            alloc_locals;
             let n = Uint256(1, 0);
             let (bytes_len, bytes) = uint256_to_bytes(n);
             assert [bytes] = 1;
@@ -73,7 +71,6 @@ namespace Tests {
         }
 
         func test_should_split_little_endian{range_check_ptr}() {
-            alloc_locals;
             let n = Uint256(0xeeff, 0);
             let (bytes_len, bytes) = uint256_to_bytes(n);
             assert [bytes] = 0xff;
@@ -83,7 +80,6 @@ namespace Tests {
         }
 
         func test_should_handle_uint256_high{range_check_ptr}() {
-            alloc_locals;
             let n = Uint256(0, 0xeeff);
             let (bytes_len, bytes) = uint256_to_bytes(n);
             assert [bytes + 16] = 0xff;
@@ -93,7 +89,6 @@ namespace Tests {
         }
 
         func test_should_handle_bigger_than_felt{range_check_ptr}() {
-            alloc_locals;
             let n = Uint256(0, 0xffffffffffffffffffffffffffffffff);
             let (bytes_len, bytes) = uint256_to_bytes(n);
             assert [bytes + 16] = 0xff;

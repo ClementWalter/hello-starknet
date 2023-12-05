@@ -10,6 +10,13 @@ func main{range_check_ptr}() {
     ArrayTests.CountNotZero.test_should_handle_empty_array();
     ArrayTests.Reverse.test_should_handle_empty_array();
     ArrayTests.Reverse.test_should_reverse();
+
+    // Not sure why but need to group tests without range_check_ptr
+    StringTests.FeltToBytes.test_should_return_zero();
+    StringTests.FeltToBytes.test_should_return_one();
+    StringTests.FeltToBytes.test_should_split_little_endian();
+    StringTests.FeltToBytes.test_should_split_with_leading_zeros();
+
     ArrayTests.Slice.test_should_handle_out_of_bounds();
     ArrayTests.Slice.test_should_slice_in_bounds();
     ArrayTests.Slice.test_should_slice_and_pad();
