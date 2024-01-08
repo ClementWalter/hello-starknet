@@ -72,6 +72,30 @@ func bytes_to_bytes8_little_endian(dst: felt*, bytes_len: felt, bytes: felt*) ->
     dw 256 ** 0;
 }
 
+func bytes_to_felt(bytes_len: felt, bytes: felt*) -> felt {
+    if (bytes_len == 0) {
+        return 0;
+    }
+    tempvar current = 0;
+
+    // bytes_len, bytes, ?, ?, current
+    loop:
+    let bytes_len = [ap - 5];
+    let bytes = cast([ap - 4], felt*);
+    let current = [ap - 1];
+
+    tempvar bytes_len = bytes_len - 1;
+    tempvar bytes = bytes + 1;
+    tempvar current = current * 256 + [bytes - 1];
+
+    static_assert bytes_len == [ap - 5];
+    static_assert bytes == [ap - 4];
+    static_assert current == [ap - 1];
+    jmp loop if bytes_len != 0;
+
+    ret;
+}
+
 namespace Tests {
     namespace BytesToBytes8LittleEndian {
         func test_should_handle_bytes_smaller_than_8() {
@@ -115,6 +139,103 @@ namespace Tests {
             assert dst_len = 2;
             assert [dst + 0] = 0x0807060504030201;
             assert [dst + 1] = 0x09;
+
+            return ();
+        }
+    }
+
+    namespace BytesToFelt {
+        func test_should_return_zero() {
+            let (bytes: felt*) = alloc();
+            let res = bytes_to_felt(0, bytes);
+            assert res = 0;
+            return ();
+        }
+
+        func test_should_return_felt_from_bytes4() {
+            let (bytes: felt*) = alloc();
+            assert [bytes + 0] = 0x01;
+            assert [bytes + 1] = 0x02;
+            assert [bytes + 2] = 0x03;
+            assert [bytes + 3] = 0x04;
+            let res = bytes_to_felt(4, bytes);
+            assert res = 0x01020304;
+            return ();
+        }
+
+        func test_should_return_felt_from_bytes8() {
+            let (bytes: felt*) = alloc();
+            assert [bytes + 0] = 0x01;
+            assert [bytes + 1] = 0x02;
+            assert [bytes + 2] = 0x03;
+            assert [bytes + 3] = 0x04;
+            assert [bytes + 4] = 0x05;
+            assert [bytes + 5] = 0x06;
+            assert [bytes + 6] = 0x07;
+            assert [bytes + 7] = 0x08;
+            let res = bytes_to_felt(8, bytes);
+            assert res = 0x0102030405060708;
+            return ();
+        }
+
+        func test_should_return_felt_from_bytes16() {
+            let (bytes: felt*) = alloc();
+            assert [bytes + 0] = 0x01;
+            assert [bytes + 1] = 0x02;
+            assert [bytes + 2] = 0x03;
+            assert [bytes + 3] = 0x04;
+            assert [bytes + 4] = 0x05;
+            assert [bytes + 5] = 0x06;
+            assert [bytes + 6] = 0x07;
+            assert [bytes + 7] = 0x08;
+            assert [bytes + 8] = 0x09;
+            assert [bytes + 9] = 0x0a;
+            assert [bytes + 10] = 0x0b;
+            assert [bytes + 11] = 0x0c;
+            assert [bytes + 12] = 0x0d;
+            assert [bytes + 13] = 0x0e;
+            assert [bytes + 14] = 0x0f;
+            assert [bytes + 15] = 0x10;
+            let res = bytes_to_felt(16, bytes);
+            assert res = 0x0102030405060708090a0b0c0d0e0f10;
+            return ();
+        }
+
+        func test_should_return_felt_from_bytes31() {
+            let (bytes: felt*) = alloc();
+            assert [bytes + 0] = 0x01;
+            assert [bytes + 1] = 0x02;
+            assert [bytes + 2] = 0x03;
+            assert [bytes + 3] = 0x04;
+            assert [bytes + 4] = 0x05;
+            assert [bytes + 5] = 0x06;
+            assert [bytes + 6] = 0x07;
+            assert [bytes + 7] = 0x08;
+            assert [bytes + 8] = 0x09;
+            assert [bytes + 9] = 0x0a;
+            assert [bytes + 10] = 0x0b;
+            assert [bytes + 11] = 0x0c;
+            assert [bytes + 12] = 0x0d;
+            assert [bytes + 13] = 0x0e;
+            assert [bytes + 14] = 0x0f;
+            assert [bytes + 15] = 0x10;
+            assert [bytes + 16] = 0x11;
+            assert [bytes + 17] = 0x12;
+            assert [bytes + 18] = 0x13;
+            assert [bytes + 19] = 0x14;
+            assert [bytes + 20] = 0x15;
+            assert [bytes + 21] = 0x16;
+            assert [bytes + 22] = 0x17;
+            assert [bytes + 23] = 0x18;
+            assert [bytes + 24] = 0x19;
+            assert [bytes + 25] = 0x1a;
+            assert [bytes + 26] = 0x1b;
+            assert [bytes + 27] = 0x1c;
+            assert [bytes + 28] = 0x1d;
+            assert [bytes + 29] = 0x1e;
+            assert [bytes + 30] = 0x1f;
+            let res = bytes_to_felt(31, bytes);
+            assert res = 0x0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f;
 
             return ();
         }

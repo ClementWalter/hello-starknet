@@ -13,7 +13,12 @@ func main{range_check_ptr}() {
     // ArrayTests.Reverse.test_should_reverse();
 
     // BytesTests.BytesToBytes8LittleEndian.test_should_handle_bytes_smaller_than_8();
-    BytesTests.BytesToBytes8LittleEndian.test_should_handle_bytes_longer_than_8();
+    // BytesTests.BytesToBytes8LittleEndian.test_should_handle_bytes_longer_than_8();
+    BytesTests.BytesToFelt.test_should_return_zero();
+    BytesTests.BytesToFelt.test_should_return_felt_from_bytes4();
+    BytesTests.BytesToFelt.test_should_return_felt_from_bytes8();
+    BytesTests.BytesToFelt.test_should_return_felt_from_bytes16();
+    BytesTests.BytesToFelt.test_should_return_felt_from_bytes31();
 
     // Not sure why but need to group tests without range_check_ptr
     // StringTests.FeltToBytes.test_should_return_zero();
